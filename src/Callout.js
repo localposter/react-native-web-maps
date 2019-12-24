@@ -4,14 +4,18 @@ import { InfoWindow } from 'react-google-maps';
 
 class MapViewCallout extends Component {
   render() {
-    const { onPress, ...rest } = this.props;
-    return (
-      <TouchableOpacity onPress={onPress}>
-        <InfoWindow onCloseClick={this.props.hideCallout} {...rest}>
-          {this.props.children}
-        </InfoWindow>
-      </TouchableOpacity>
-    );
+    const { onPress, isOpen, ...rest } = this.props;
+    if (isOpen) {
+      return (
+        <TouchableOpacity onPress={onPress}>
+          <InfoWindow onCloseClick={this.props.hideCallout} {...rest}>
+            {this.props.children}
+          </InfoWindow>
+        </TouchableOpacity>
+      );
+    } else {
+      return null;
+    }
   }
 }
 

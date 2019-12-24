@@ -91,8 +91,11 @@ storiesOf('Marker', module)
           description="Shape the future of mobile with us"
           coordinate={{ latitude: 48.8828463, longitude: 2.3229091 }}
           onPress={() => {
-            this.marker1.showCallout();
+            this.marker.showCallout();
           }}>
+          <View style={{ padding: 10 }}>
+            <Text>Paris</Text>
+          </View>
           <MapView.Callout onPress={action('onPress callout')}>
             <View style={{ padding: 10 }}>
               <Text>Paris</Text>

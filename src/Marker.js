@@ -15,7 +15,11 @@ class MapViewMarker extends Component {
     const { description, title, coordinate, onPress, ...rest } = this.props;
 
     const childrenWithProps = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, { hideCallout: this.hideCallout.bind(this) });
+      console.log(typeof child);
+      return React.cloneElement(child, {
+        hideCallout: this.hideCallout.bind(this),
+        isOpen: this.state.isOpen,
+      });
     });
     return (
       <Marker
@@ -23,7 +27,7 @@ class MapViewMarker extends Component {
         title={description ? `${title}\n${description}` : title}
         position={{ lat: coordinate.latitude, lng: coordinate.longitude }}
         onClick={onPress}>
-        {this.state.isOpen && childrenWithProps}
+        {childrenWithProps}
       </Marker>
     );
   }
