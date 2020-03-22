@@ -4,7 +4,7 @@ import { Circle } from "react-google-maps";
 class MapViewCircle extends PureComponent {
   render() {
     const {
-      coordinate,
+      center,
       radius,
       fillColor,
       strokeColor,
@@ -12,7 +12,7 @@ class MapViewCircle extends PureComponent {
     } = this.props;
     return (
       <Circle
-        center={{ lat: coordinate.latitude, lng: coordinate.longitude }}
+        center={{ lat: center.latitude, lng: center.longitude }}
         radius={radius}
         options={{
           fillColor: fillColor,
