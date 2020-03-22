@@ -6,20 +6,13 @@ class MapViewCircle extends PureComponent {
     const {
       center,
       radius,
-      fillColor,
-      strokeColor,
-      strokeWidth
+      options,
     } = this.props;
     return (
       <Circle
         center={{ lat: center.latitude, lng: center.longitude }}
         radius={radius}
-        options={{
-          fillColor: fillColor,
-          fillOpacity: 1,
-          strokeColor: strokeColor,
-          strokeWeight: strokeWidth
-        }}
+        options={options}
       />
     );
   }
