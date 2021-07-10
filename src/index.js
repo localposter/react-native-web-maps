@@ -45,12 +45,13 @@ class MapView extends Component {
 		//const { region } = this.map.props;
 		if (this.map && onRegionChangeComplete) {
 			const center = this.map.getCenter();
+			console.log(this.map);
 			//const zoom = this.map.getZoom();
 			onRegionChangeComplete({
 				latitude: center.lat(),
 				longitude: center.lng(),
-				latitudeDelta: this.map.region.latitudeDelta,
-				longitudeDelta: this.map.region.longitudeDelta,
+				// latitudeDelta: this.map.region.latitudeDelta,
+				// longitudeDelta: this.map.region.longitudeDelta,
 				//currentZoom: zoom,
 			});
 		}
