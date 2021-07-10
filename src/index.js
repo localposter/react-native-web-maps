@@ -45,6 +45,7 @@ class MapView extends Component {
 		//const { region } = this.map.props;
 		if (this.map && onRegionChangeComplete) {
 			const center = this.map.getCenter();
+			console.log(this.props);
 			console.log(this.map);
 			//const zoom = this.map.getZoom();
 			onRegionChangeComplete({
