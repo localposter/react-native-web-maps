@@ -40,20 +40,20 @@ class MapView extends Component {
 		});
 	}
 
-	onDragEnd = () => {
-		const { onRegionChangeComplete } = this.props;
-		const { region } = this.map.props;
-		if (this.map && onRegionChangeComplete) {
-			const center = this.map.getCenter();
-			// const zoom = this.map.getZoom();
-			onRegionChangeComplete({
-				latitude: center.lat(),
-				longitude: center.lng(),
-				latitudeDelta: region.latitudeDelta,
-				longitudeDelta: region.longitudeDelta,
-			});
-		}
-	};
+	// onDragEnd = () => {
+	// 	const { onRegionChangeComplete } = this.props;
+	// 	const { region } = this.map.props;
+	// 	if (this.map && onRegionChangeComplete) {
+	// 		const center = this.map.getCenter();
+	// 		// const zoom = this.map.getZoom();
+	// 		onRegionChangeComplete({
+	// 			latitude: center.lat(),
+	// 			longitude: center.lng(),
+	// 			latitudeDelta: region.latitudeDelta,
+	// 			longitudeDelta: region.longitudeDelta,
+	// 		});
+	// 	}
+	// };
 
 	render() {
 		const {
@@ -63,6 +63,7 @@ class MapView extends Component {
 			onPress,
 			options,
 			defaultZoom,
+			onRegionChangeComplete,
 		} = this.props;
 		const { center } = this.state;
 		const style = this.props.style || styles.container;
@@ -101,7 +102,8 @@ class MapView extends Component {
 					}}
 					{...googleMapProps}
 					onDragStart={onRegionChange}
-					onIdle={this.onDragEnd}
+					// onIdle={this.onDragEnd}
+					onIdle={onRegionChangeComplete}
 					defaultZoom={zoom}
 					onClick={onPress}
 					options={options}
