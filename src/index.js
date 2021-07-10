@@ -47,11 +47,15 @@ class MapView extends Component {
 			const center = this.map.getCenter();
 
 			const bounds = this.map.getBounds();
-			const ne = bounds.getNorthEast();
-			const sw = bounds.getSouthWest();
+			var neLat = bounds.getNorthEast().lat();
+			var neLng = bounds.getNorthEast().lng();
+			var swLat = bounds.getSouthWest().lat();
+			var swLng = bounds.getSouthWest().lng();
 			console.log(bounds);
-			console.log(ne);
-			console.log(sw);
+			console.log(neLat);
+			console.log(neLng);
+			console.log(swLat);
+			console.log(swLng);
 			console.log("Test");
 
 			onRegionChangeComplete({
