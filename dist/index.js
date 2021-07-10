@@ -127,6 +127,19 @@ var MapView = (function(_Component) {
 						heading: _this.map.getHeading(),
 					};
 				}),
+				(_this.onDragEnd = function() {
+					var onRegionChangeComplete = _this.props.onRegionChangeComplete;
+					var region = _this.map.props.region;
+					if (_this.map && onRegionChangeComplete) {
+						var center = _this.map.getCenter();
+						onRegionChangeComplete({
+							latitude: center.lat(),
+							longitude: center.lng(),
+							latitudeDelta: region.latitudeDelta,
+							longitudeDelta: region.longitudeDelta,
+						});
+					}
+				}),
 				_temp)),
 			_possibleConstructorReturn(_this, _ret)
 		);
@@ -157,8 +170,7 @@ var MapView = (function(_Component) {
 					onRegionChange = _props.onRegionChange,
 					onPress = _props.onPress,
 					options = _props.options,
-					defaultZoom = _props.defaultZoom,
-					onRegionChangeComplete = _props.onRegionChangeComplete;
+					defaultZoom = _props.defaultZoom;
 				var center = this.state.center;
 				var style = this.props.style || styles.container;
 				var googleMapProps = center
@@ -183,7 +195,7 @@ var MapView = (function(_Component) {
 					_reactNative.View,
 					{
 						style: style,
-						__source: { fileName: _jsxFileName, lineNumber: 91 },
+						__source: { fileName: _jsxFileName, lineNumber: 94 },
 					},
 					_react2.default.createElement(
 						GoogleMapContainer,
@@ -192,11 +204,11 @@ var MapView = (function(_Component) {
 								handleMapMounted: this.handleMapMounted,
 								containerElement: _react2.default.createElement("div", {
 									style: { height: "100%" },
-									__source: { fileName: _jsxFileName, lineNumber: 94 },
+									__source: { fileName: _jsxFileName, lineNumber: 97 },
 								}),
 								mapElement: _react2.default.createElement("div", {
 									style: { height: "100%" },
-									__source: { fileName: _jsxFileName, lineNumber: 95 },
+									__source: { fileName: _jsxFileName, lineNumber: 98 },
 								}),
 								onZoomChanged: function onZoomChanged() {
 									_this2.setState({ zoom: _this2.map.getZoom() });
@@ -205,11 +217,11 @@ var MapView = (function(_Component) {
 							googleMapProps,
 							{
 								onDragStart: onRegionChange,
-								onIdle: onRegionChangeComplete,
+								onIdle: this.onDragEnd,
 								defaultZoom: zoom,
 								onClick: onPress,
 								options: options,
-								__source: { fileName: _jsxFileName, lineNumber: 92 },
+								__source: { fileName: _jsxFileName, lineNumber: 95 },
 							}
 						),
 						this.props.children
