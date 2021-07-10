@@ -29,6 +29,8 @@ var _extends =
 		return target;
 	};
 var _jsxFileName = "src\\index.js";
+var _react = require("react");
+var _react2 = _interopRequireDefault(_react);
 var _reactNative = require("react-native");
 var _reactGoogleMaps = require("react-google-maps");
 var _Marker = require("./Marker");
@@ -80,7 +82,7 @@ function _inherits(subClass, superClass) {
 			: (subClass.__proto__ = superClass);
 }
 var GoogleMapContainer = (0, _reactGoogleMaps.withGoogleMap)(function(props) {
-	return React.createElement(
+	return _react2.default.createElement(
 		_reactGoogleMaps.GoogleMap,
 		_extends({}, props, {
 			ref: props.handleMapMounted,
@@ -190,22 +192,22 @@ var MapView = (function(_Component) {
 						? Math.round(Math.log(360 / initialRegion.latitudeDelta) / Math.LN2)
 						: 15);
 				googleMapProps["zoom"] = this.state.zoom ? this.state.zoom : zoom;
-				return React.createElement(
+				return _react2.default.createElement(
 					_reactNative.View,
 					{
 						style: style,
 						__source: { fileName: _jsxFileName, lineNumber: 92 },
 					},
-					React.createElement(
+					_react2.default.createElement(
 						GoogleMapContainer,
 						_extends(
 							{
 								handleMapMounted: this.handleMapMounted,
-								containerElement: React.createElement("div", {
+								containerElement: _react2.default.createElement("div", {
 									style: { height: "100%" },
 									__source: { fileName: _jsxFileName, lineNumber: 95 },
 								}),
-								mapElement: React.createElement("div", {
+								mapElement: _react2.default.createElement("div", {
 									style: { height: "100%" },
 									__source: { fileName: _jsxFileName, lineNumber: 96 },
 								}),
@@ -230,7 +232,7 @@ var MapView = (function(_Component) {
 		},
 	]);
 	return MapView;
-})(Component);
+})(_react.Component);
 MapView.Marker = _Marker2.default;
 MapView.Polyline = _Polyline2.default;
 MapView.Polygon = _Polygon2.default;

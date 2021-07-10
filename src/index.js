@@ -1,4 +1,4 @@
-
+import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { withGoogleMap, GoogleMap } from "react-google-maps";
 import Marker from "./Marker";
@@ -48,7 +48,7 @@ class MapView extends Component {
 				latitude: center.lat(),
 				longitude: center.lng(),
 				latitudeDelta: region.latitudeDelta,
-				longitudeDelta: region.longitudeDelta
+				longitudeDelta: region.longitudeDelta,
 			});
 		}
 	};
