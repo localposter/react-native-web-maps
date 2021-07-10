@@ -46,11 +46,11 @@ class MapView extends Component {
 		if (this.map && onRegionChangeComplete) {
 			const center = this.map.getCenter();
 
-			// const bounds = this.map.getBounds();
-			// var neLat = bounds.getNorthEast().lat();
-			// var neLng = bounds.getNorthEast().lng();
-			// var swLat = bounds.getSouthWest().lat();
-			// var swLng = bounds.getSouthWest().lng();
+			const bounds = this.map.getBounds();
+			var neLat = bounds.getNorthEast().lat();
+			var neLng = bounds.getNorthEast().lng();
+			var swLat = bounds.getSouthWest().lat();
+			var swLng = bounds.getSouthWest().lng();
 			// console.log(bounds);
 			// console.log(neLat);
 			// console.log(neLng);
@@ -61,15 +61,8 @@ class MapView extends Component {
 			onRegionChangeComplete({
 				latitude: center.lat(),
 				longitude: center.lng(),
-				latitudeDelta:
-					this.map
-						.getBounds()
-						.getNorthEast()
-						.lat() -
-					this.map
-						.getBounds()
-						.getSouthWest()
-						.lat(),
+				latitudeDelta: neLat - swLat,
+				longitudeDelta: neLng >= swLng ? neLng - swLng : neLng + 360 - swLng,
 				// latitudeDelta: this.map.region.latitudeDelta,
 				// longitudeDelta: this.map.region.longitudeDelta,
 			});
