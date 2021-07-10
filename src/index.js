@@ -40,18 +40,16 @@ class MapView extends Component {
 		});
 	}
 
-	onDragEnd = (region) => {
-		const { onRegionChangeComplete } = this.props;
-		if (this.map && onRegionChangeComplete) {
-			const center = this.map.getCenter();
-			onRegionChangeComplete({
-				latitude: center.lat(),
-				longitude: center.lng(),
-				latitudeDelta: region.latitudeDelta,
-				longitudeDelta: region.longitudeDelta,
-			});
-		}
-	};
+	// onDragEnd = () => {
+	// const { onRegionChangeComplete } = this.props;
+	// if (this.map && onRegionChangeComplete) {
+	// const center = this.map.getCenter();
+	// onRegionChangeComplete({
+	// latitude: center.lat(),
+	// longitude: center.lng(),
+	// });
+	// }
+	// };
 
 	render() {
 		const {
@@ -61,6 +59,7 @@ class MapView extends Component {
 			onPress,
 			options,
 			defaultZoom,
+			onRegionChangeComplete,
 		} = this.props;
 		const { center } = this.state;
 		const style = this.props.style || styles.container;
@@ -99,7 +98,7 @@ class MapView extends Component {
 					}}
 					{...googleMapProps}
 					onDragStart={onRegionChange}
-					onIdle={(region) => this.onDragEnd(region)}
+					onIdle={onRegionChangeComplete}
 					defaultZoom={zoom}
 					onClick={onPress}
 					options={options}
