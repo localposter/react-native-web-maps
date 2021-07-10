@@ -28,9 +28,7 @@ var _extends =
 		}
 		return target;
 	};
-var _jsxFileName = "src/index.js";
-var _react = require("react");
-var _react2 = _interopRequireDefault(_react);
+var _jsxFileName = "src\\index.js";
 var _reactNative = require("react-native");
 var _reactGoogleMaps = require("react-google-maps");
 var _Marker = require("./Marker");
@@ -82,11 +80,11 @@ function _inherits(subClass, superClass) {
 			: (subClass.__proto__ = superClass);
 }
 var GoogleMapContainer = (0, _reactGoogleMaps.withGoogleMap)(function(props) {
-	return _react2.default.createElement(
+	return React.createElement(
 		_reactGoogleMaps.GoogleMap,
 		_extends({}, props, {
 			ref: props.handleMapMounted,
-			__source: { fileName: _jsxFileName, lineNumber: 12 },
+			__source: { fileName: _jsxFileName, lineNumber: 11 },
 		})
 	);
 });
@@ -128,12 +126,16 @@ var MapView = (function(_Component) {
 					};
 				}),
 				(_this.onDragEnd = function() {
-					var onRegionChangeComplete = _this.props.onRegionChangeComplete;
+					var _this$props = _this.props,
+						onRegionChangeComplete = _this$props.onRegionChangeComplete,
+						region = _this$props.region;
 					if (_this.map && onRegionChangeComplete) {
 						var center = _this.map.getCenter();
 						onRegionChangeComplete({
 							latitude: center.lat(),
 							longitude: center.lng(),
+							latitudeDelta: region.latitudeDelta,
+							longitudeDelta: region.longitudeDelta,
 						});
 					}
 				}),
@@ -188,24 +190,24 @@ var MapView = (function(_Component) {
 						? Math.round(Math.log(360 / initialRegion.latitudeDelta) / Math.LN2)
 						: 15);
 				googleMapProps["zoom"] = this.state.zoom ? this.state.zoom : zoom;
-				return _react2.default.createElement(
+				return React.createElement(
 					_reactNative.View,
 					{
 						style: style,
-						__source: { fileName: _jsxFileName, lineNumber: 91 },
+						__source: { fileName: _jsxFileName, lineNumber: 92 },
 					},
-					_react2.default.createElement(
+					React.createElement(
 						GoogleMapContainer,
 						_extends(
 							{
 								handleMapMounted: this.handleMapMounted,
-								containerElement: _react2.default.createElement("div", {
-									style: { height: "100%" },
-									__source: { fileName: _jsxFileName, lineNumber: 94 },
-								}),
-								mapElement: _react2.default.createElement("div", {
+								containerElement: React.createElement("div", {
 									style: { height: "100%" },
 									__source: { fileName: _jsxFileName, lineNumber: 95 },
+								}),
+								mapElement: React.createElement("div", {
+									style: { height: "100%" },
+									__source: { fileName: _jsxFileName, lineNumber: 96 },
 								}),
 								onZoomChanged: function onZoomChanged() {
 									_this2.setState({ zoom: _this2.map.getZoom() });
@@ -218,7 +220,7 @@ var MapView = (function(_Component) {
 								defaultZoom: zoom,
 								onClick: onPress,
 								options: options,
-								__source: { fileName: _jsxFileName, lineNumber: 92 },
+								__source: { fileName: _jsxFileName, lineNumber: 93 },
 							}
 						),
 						this.props.children
@@ -228,7 +230,7 @@ var MapView = (function(_Component) {
 		},
 	]);
 	return MapView;
-})(_react.Component);
+})(Component);
 MapView.Marker = _Marker2.default;
 MapView.Polyline = _Polyline2.default;
 MapView.Polygon = _Polygon2.default;

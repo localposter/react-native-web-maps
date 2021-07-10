@@ -12,7 +12,7 @@ var _extends =
 		}
 		return target;
 	};
-var _jsxFileName = "src\\Polygon.js";
+var _jsxFileName = "src/Polygon.js";
 var _createClass = (function() {
 	function defineProperties(target, props) {
 		for (var i = 0; i < props.length; i++) {
