@@ -52,13 +52,13 @@ class MapView extends Component {
 			console.log(bounds);
 			console.log(ne);
 			console.log(sw);
+			console.log("Test");
 
 			onRegionChangeComplete({
 				latitude: center.lat(),
 				longitude: center.lng(),
 				// latitudeDelta: this.map.region.latitudeDelta,
 				// longitudeDelta: this.map.region.longitudeDelta,
-				//currentZoom: zoom,
 			});
 		}
 	};
