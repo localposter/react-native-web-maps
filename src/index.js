@@ -47,7 +47,11 @@ class MapView extends Component {
 			const center = this.map.getCenter();
 
 			const bounds = this.map.getBounds();
+			const ne = bounds.getNorthEast();
+			const sw = bounds.getSouthWest();
 			console.log(bounds);
+			console.log(ne);
+			console.log(sw);
 
 			onRegionChangeComplete({
 				latitude: center.lat(),
