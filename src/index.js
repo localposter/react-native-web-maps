@@ -40,7 +40,7 @@ class MapView extends Component {
 		});
 	}
 
-	onDragEnd = () => {
+	onDragEnd = (region) => {
 		const { onRegionChangeComplete } = this.props;
 		if (this.map && onRegionChangeComplete) {
 			const center = this.map.getCenter();
@@ -99,7 +99,7 @@ class MapView extends Component {
 					}}
 					{...googleMapProps}
 					onDragStart={onRegionChange}
-					onIdle={this.onDragEnd}
+					onIdle={(region) => this.onDragEnd(region)}
 					defaultZoom={zoom}
 					onClick={onPress}
 					options={options}
