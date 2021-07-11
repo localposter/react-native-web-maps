@@ -40,24 +40,35 @@ class MapView extends Component {
 		});
 	}
 
+	_getCurrentRegion = () => {
+		const center = this.map.getCenter();
+		const bounds = this.map.getBounds();
+
+		return {
+			latitude: center.lat(),
+			longitude: center.lng(),
+			latitudeDelta: Math.abs(
+				bounds.getSouthWest().lat() - bounds.getNorthEast().lat()
+			),
+			longitudeDelta: Math.abs(
+				bounds.getSouthWest().lng() - bounds.getNorthEast().lng()
+			),
+		};
+	};
+
+	onDragStart = () => {
+		const { onRegionChange } = this.props;
+
+		if (this.map && onRegionChange) {
+			onRegionChange(this._getCurrentRegion());
+		}
+	};
+
 	onDragEnd = () => {
 		const { onRegionChangeComplete } = this.props;
 
 		if (this.map && onRegionChangeComplete) {
-			const center = this.map.getCenter();
-
-			const bounds = this.map.getBounds();
-			var neLat = bounds.getNorthEast().lat();
-			var neLng = bounds.getNorthEast().lng();
-			var swLat = bounds.getSouthWest().lat();
-			var swLng = bounds.getSouthWest().lng();
-
-			onRegionChangeComplete({
-				latitude: center.lat(),
-				longitude: center.lng(),
-				latitudeDelta: neLat - swLat,
-				longitudeDelta: neLng >= swLng ? neLng - swLng : neLng + 360 - swLng,
-			});
+			onRegionChangeComplete(this._getCurrentRegion());
 		}
 	};
 
@@ -69,7 +80,6 @@ class MapView extends Component {
 			onPress,
 			options,
 			defaultZoom,
-			onRegionChangeComplete,
 		} = this.props;
 		const { center } = this.state;
 		const style = this.props.style || styles.container;
@@ -103,15 +113,11 @@ class MapView extends Component {
 					handleMapMounted={this.handleMapMounted}
 					containerElement={<div style={{ height: "100%" }} />}
 					mapElement={<div style={{ height: "100%" }} />}
-					// onZoomChanged={() => {
-					// 	this.setState({ zoom: this.map.getZoom() });
-					// }}
+					onZoomChanged={() => {
+						this.setState({ zoom: this.map.getZoom() });
+					}}
 					{...googleMapProps}
-					onDragStart={onRegionChange}
-					onDragEnd={this.onDragEnd}
-					//onCenterChanged={this.onDragEnd}
-					//onBoundsChanged={this.onDragEnd}
-					// onZoomChanged={this.onDragEnd}
+					onDragStart={this.onDragStart}
 					onIdle={this.onDragEnd}
 					defaultZoom={zoom}
 					onClick={onPress}
