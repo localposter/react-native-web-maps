@@ -102,31 +102,23 @@ class MapView extends Component {
 					},
 			  };
 
-		function calcZoom(region) {
-			if (!region.latitudeDelta || !region.longitudeDelta) return 13;
-			const avgDelta = (region.longitudeDelta + region.latitudeDelta) / 2.0;
-			// calculate zoom according to https://stackoverflow.com/a/46570766
-			return Math.round(Math.log(360 / avgDelta) / Math.LN2);
-		}
-		// const zoom =
-		// 	defaultZoom ||
-		// 	(region && region.latitudeDelta
-		// 		? Math.round(Math.log(360 / region.latitudeDelta) / Math.LN2)
-		// 		: initialRegion && initialRegion.latitudeDelta
-		// 		? Math.round(Math.log(360 / initialRegion.latitudeDelta) / Math.LN2)
-		// 		: 15);
-		// googleMapProps["zoom"] = this.state.zoom ? this.state.zoom : zoom;
-		const zoom = calcZoom(this.props.region);
-
+		const zoom =
+			defaultZoom ||
+			(region && region.latitudeDelta
+				? (Math.log(360 / region.latitudeDelta) / Math.LN2).toFixed(2)
+				: initialRegion && initialRegion.latitudeDelta
+				? (Math.log(360 / initialRegion.latitudeDelta) / Math.LN2).toFixed(2)
+				: 15);
+		googleMapProps["zoom"] = this.state.zoom ? this.state.zoom : zoom;
 		return (
 			<View style={style}>
 				<GoogleMapContainer
 					handleMapMounted={this.handleMapMounted}
 					containerElement={<div style={{ height: "100%" }} />}
 					mapElement={<div style={{ height: "100%" }} />}
-					// onZoomChanged={() => {
-					// this.setState({ zoom: this.map.getZoom() });
-					// }}
+					onZoomChanged={() => {
+						this.setState({ zoom: this.map.getZoom() });
+					}}
 					{...googleMapProps}
 					onDragStart={this.onDragStart}
 					onDragEnd={this.onDragEnd}
