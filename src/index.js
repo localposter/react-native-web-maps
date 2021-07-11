@@ -11,13 +11,6 @@ const GoogleMapContainer = withGoogleMap((props) => (
 	<GoogleMap {...props} ref={props.handleMapMounted} />
 ));
 
-function calcZoom(region) {
-	if (!region.latitudeDelta || !region.longitudeDelta) return 13;
-	const avgDelta = (region.longitudeDelta + region.latitudeDelta) / 2.0;
-	// calculate zoom according to https://stackoverflow.com/a/46570766
-	return Math.round(Math.log(360 / avgDelta) / Math.LN2);
-}
-
 class MapView extends Component {
 	state = {
 		center: null,
@@ -108,6 +101,13 @@ class MapView extends Component {
 						lng: initialRegion.longitude,
 					},
 			  };
+
+		function calcZoom(region) {
+			if (!region.latitudeDelta || !region.longitudeDelta) return 13;
+			const avgDelta = (region.longitudeDelta + region.latitudeDelta) / 2.0;
+			// calculate zoom according to https://stackoverflow.com/a/46570766
+			return Math.round(Math.log(360 / avgDelta) / Math.LN2);
+		}
 		// const zoom =
 		// 	defaultZoom ||
 		// 	(region && region.latitudeDelta
