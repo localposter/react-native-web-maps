@@ -99,14 +99,14 @@ class MapView extends Component {
 						lng: initialRegion.longitude,
 					},
 			  };
-		// const zoom =
-		// 	defaultZoom ||
-		// 	(region && region.latitudeDelta
-		// 		? Math.round(Math.log(360 / region.latitudeDelta) / Math.LN2)
-		// 		: initialRegion && initialRegion.latitudeDelta
-		// 		? Math.round(Math.log(360 / initialRegion.latitudeDelta) / Math.LN2)
-		// 		: 15);
-		// googleMapProps["zoom"] = this.state.zoom ? this.state.zoom : zoom;
+		const zoom =
+			defaultZoom ||
+			(region && region.latitudeDelta
+				? Math.round(Math.log(360 / region.latitudeDelta) / Math.LN2)
+				: initialRegion && initialRegion.latitudeDelta
+				? Math.round(Math.log(360 / initialRegion.latitudeDelta) / Math.LN2)
+				: 15);
+		googleMapProps["zoom"] = this.state.zoom ? this.state.zoom : zoom;
 		return (
 			<View style={style}>
 				<GoogleMapContainer
@@ -119,7 +119,7 @@ class MapView extends Component {
 					{...googleMapProps}
 					onDragStart={this.onDragStart}
 					onIdle={this.onDragEnd}
-					// defaultZoom={15}
+					defaultZoom={zoom}
 					onClick={onPress}
 					options={options}
 				>
