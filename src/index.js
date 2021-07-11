@@ -110,12 +110,12 @@ class MapView extends Component {
 					handleMapMounted={this.handleMapMounted}
 					containerElement={<div style={{ height: "100%" }} />}
 					mapElement={<div style={{ height: "100%" }} />}
-					// onZoomChanged={() => {
-					// 	this.setState({ zoom: this.map.getZoom() });
-					// }}
+					onZoomChanged={() => {
+						this.setState({ zoom: this.map.getZoom() });
+					}}
 					{...googleMapProps}
 					onDragStart={onRegionChange}
-					onIdle={this.onDragEnd}
+					onDragEnd={this.onDragEnd}
 					//onIdle={onRegionChangeComplete}
 					defaultZoom={zoom}
 					onClick={onPress}
