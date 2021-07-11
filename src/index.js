@@ -21,24 +21,26 @@ class MapView extends Component {
 		this.props.onMapReady && this.props.onMapReady();
 	};
 
-	// getCamera = () => {
-	// 	return {
-	// 		zoom: this.map.getZoom(),
-	// 		center: this.map.getCenter(),
-	// 		heading: this.map.getHeading(),
-	// 	};
-	// };
+	getCamera = () => {
+		return {
+			zoom: this.map.getZoom(),
+			center: this.map.getCenter(),
+			heading: this.map.getHeading(),
+		};
+	};
 
-	// animateCamera(camera) {
-	// 	this.setState({ zoom: camera.zoom });
-	// 	this.setState({ center: camera.center });
-	// }
+	animateCamera(camera) {
+		this.setState({ zoom: camera.zoom });
+		this.setState({ center: camera.center });
+	}
 
-	// animateToRegion(coordinates) {
-	// 	this.setState({
-	// 		center: { lat: coordinates.latitude, lng: coordinates.longitude },
-	// 	});
-	// }
+	animateToRegion(coordinates) {
+		// this.setState({
+		// center: { lat: coordinates.latitude, lng: coordinates.longitude },
+		// });
+
+		this.map.panTo({ lat: coordinates.latitude, lng: coordinates.longitude });
+	}
 
 	_getCurrentRegion = () => {
 		const center = this.map.getCenter();
