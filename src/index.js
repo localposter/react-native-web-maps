@@ -118,7 +118,7 @@ class MapView extends Component {
 					}}
 					{...googleMapProps}
 					onDragStart={this.onDragStart}
-					onIdle={this.onDragEnd}
+					onDragEnd={this.onDragEnd}
 					defaultZoom={zoom}
 					onClick={onPress}
 					options={options}
