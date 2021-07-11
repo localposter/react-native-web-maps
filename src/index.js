@@ -115,10 +115,10 @@ class MapView extends Component {
 					// }}
 					{...googleMapProps}
 					onDragStart={onRegionChange}
-					onDragEnd={this.onDragEnd}
+					//onDragEnd={this.onDragEnd}
 					onCenterChanged={this.onDragEnd}
-					onBoundsChanged={this.onDragEnd}
-					onZoomChanged={this.onDragEnd}
+					//onBoundsChanged={this.onDragEnd}
+					//onZoomChanged={this.onDragEnd}
 					//onIdle={onRegionChangeComplete}
 					defaultZoom={zoom}
 					onClick={onPress}
