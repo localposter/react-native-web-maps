@@ -21,24 +21,24 @@ class MapView extends Component {
 		this.props.onMapReady && this.props.onMapReady();
 	};
 
-	// getCamera = () => {
-	// 	return {
-	// 		zoom: this.map.getZoom(),
-	// 		center: this.map.getCenter(),
-	// 		heading: this.map.getHeading(),
-	// 	};
-	// };
+	getCamera = () => {
+		return {
+			zoom: this.map.getZoom(),
+			center: this.map.getCenter(),
+			heading: this.map.getHeading(),
+		};
+	};
 
-	// animateCamera(camera) {
-	// 	this.setState({ zoom: camera.zoom });
-	// 	this.setState({ center: camera.center });
-	// }
+	animateCamera(camera) {
+		this.setState({ zoom: camera.zoom });
+		this.setState({ center: camera.center });
+	}
 
-	// animateToRegion(coordinates) {
-	// 	this.setState({
-	// 		center: { lat: coordinates.latitude, lng: coordinates.longitude },
-	// 	});
-	// }
+	animateToRegion(coordinates) {
+		this.setState({
+			center: { lat: coordinates.latitude, lng: coordinates.longitude },
+		});
+	}
 
 	_getCurrentRegion = () => {
 		const center = this.map.getCenter();
@@ -102,9 +102,9 @@ class MapView extends Component {
 		const zoom =
 			defaultZoom ||
 			(region && region.latitudeDelta
-				? Math(Math.log(360 / region.latitudeDelta) / Math.LN2)
+				? Math.round(Math.log(360 / region.latitudeDelta) / Math.LN2)
 				: initialRegion && initialRegion.latitudeDelta
-				? Math(Math.log(360 / initialRegion.latitudeDelta) / Math.LN2)
+				? Math.round(Math.log(360 / initialRegion.latitudeDelta) / Math.LN2)
 				: 15);
 		googleMapProps["zoom"] = this.state.zoom ? this.state.zoom : zoom;
 		return (
