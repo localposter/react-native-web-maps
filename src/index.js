@@ -40,34 +40,27 @@ class MapView extends Component {
 		});
 	}
 
-	onDragEnd = () => {
-		const { onRegionChangeComplete } = this.props;
+	// onDragEnd = () => {
+	// 	const { onRegionChangeComplete } = this.props;
 
-		if (this.map && onRegionChangeComplete) {
-			const center = this.map.getCenter();
+	// 	if (this.map && onRegionChangeComplete) {
+	// 		const center = this.map.getCenter();
 
-			const bounds = this.map.getBounds();
-			var neLat = bounds.getNorthEast().lat();
-			var neLng = bounds.getNorthEast().lng();
-			var swLat = bounds.getSouthWest().lat();
-			var swLng = bounds.getSouthWest().lng();
-			// console.log(bounds);
-			// console.log(neLat);
-			// console.log(neLng);
-			// console.log(swLat);
-			// console.log(swLng);
-			// console.log("Test");
+	// 		const bounds = this.map.getBounds();
+	// 		var neLat = bounds.getNorthEast().lat();
+	// 		var neLng = bounds.getNorthEast().lng();
+	// 		var swLat = bounds.getSouthWest().lat();
+	// 		var swLng = bounds.getSouthWest().lng();
 
-			onRegionChangeComplete({
-				latitude: center.lat(),
-				longitude: center.lng(),
-				latitudeDelta: neLat - swLat,
-				longitudeDelta: neLng >= swLng ? neLng - swLng : neLng + 360 - swLng,
-				// latitudeDelta: this.map.region.latitudeDelta,
-				// longitudeDelta: this.map.region.longitudeDelta,
-			});
-		}
-	};
+	// 		onRegionChangeComplete({
+	// 			latitude: center.lat(),
+	// 			longitude: center.lng(),
+	// 			latitudeDelta: neLat - swLat,
+	// 			longitudeDelta: neLng >= swLng ? neLng - swLng : neLng + 360 - swLng,
+
+	// 		});
+	// 	}
+	// };
 
 	render() {
 		const {
@@ -77,6 +70,7 @@ class MapView extends Component {
 			onPress,
 			options,
 			defaultZoom,
+			onRegionChangeComplete,
 		} = this.props;
 		const { center } = this.state;
 		const style = this.props.style || styles.container;
@@ -116,10 +110,15 @@ class MapView extends Component {
 					{...googleMapProps}
 					onDragStart={onRegionChange}
 					//onDragEnd={this.onDragEnd}
-					onCenterChanged={this.onDragEnd}
+					//onCenterChanged={this.onDragEnd}
 					//onBoundsChanged={this.onDragEnd}
 					//onZoomChanged={this.onDragEnd}
-					//onIdle={onRegionChangeComplete}
+					onIdle={onRegionChangeComplete({
+						latitude: region.latitude,
+						longitude: region.longitude,
+						latitudeDelta: region.latitudeDelta,
+						longitudeDelta: region.longitudeDelta,
+					})}
 					defaultZoom={zoom}
 					onClick={onPress}
 					options={options}
