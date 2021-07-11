@@ -127,7 +127,7 @@ class MapView extends Component {
 					// onZoomChanged={() => {
 					// this.setState({ zoom: this.map.getZoom() });
 					// }}
-					// {...googleMapProps}
+					{...googleMapProps}
 					onDragStart={this.onDragStart}
 					onDragEnd={this.onDragEnd}
 					defaultZoom={zoom}
