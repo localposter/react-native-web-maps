@@ -69,6 +69,7 @@ class MapView extends Component {
 		if (this.map && onRegionChange) {
 			onRegionChange(this._getCurrentRegion());
 		}
+		console.log(onRegionChange);
 	};
 
 	onDragEnd = () => {
@@ -78,6 +79,7 @@ class MapView extends Component {
 		if (this.map && onRegionChangeComplete) {
 			onRegionChangeComplete(this._getCurrentRegion());
 		}
+		console.log(onRegionChangeComplete);
 	};
 
 	render() {
@@ -134,7 +136,7 @@ class MapView extends Component {
 					}}
 					{...googleMapProps}
 					onDragStart={this.onDragStart}
-					onDragEnd={this.onDragEnd}
+					onIdle={this.onDragEnd}
 					defaultZoom={zoom}
 					onClick={onPress}
 					options={options}
