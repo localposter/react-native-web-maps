@@ -17,11 +17,13 @@ class MapView extends Component {
 	};
 
 	handleMapMounted = (map) => {
+		console.log("i am in handleMapMounted");
 		this.map = map;
 		this.props.onMapReady && this.props.onMapReady();
 	};
 
 	getCamera = () => {
+		console.log("i am in getCamera");
 		return {
 			zoom: this.map.getZoom(),
 			center: this.map.getCenter(),
@@ -30,11 +32,13 @@ class MapView extends Component {
 	};
 
 	animateCamera(camera) {
+		console.log("i am in animateCamera");
 		this.setState({ zoom: camera.zoom });
 		this.setState({ center: camera.center });
 	}
 
 	animateToRegion(coordinates) {
+		console.log("i am in animateToRegion");
 		this.setState({
 			center: { lat: coordinates.latitude, lng: coordinates.longitude },
 		});
@@ -59,6 +63,7 @@ class MapView extends Component {
 	};
 
 	onDragStart = () => {
+		console.log("i am in onDragStart");
 		const { onRegionChange } = this.props;
 
 		if (this.map && onRegionChange) {
@@ -67,6 +72,7 @@ class MapView extends Component {
 	};
 
 	onDragEnd = () => {
+		console.log("i am in onDragEnd");
 		const { onRegionChangeComplete } = this.props;
 
 		if (this.map && onRegionChangeComplete) {
@@ -105,10 +111,12 @@ class MapView extends Component {
 		const zoom =
 			defaultZoom ||
 			(region && region.latitudeDelta
-				? (Math.log(360 / region.latitudeDelta) / Math.LN2).toFixed(2)
+				? Math.round(Math.log(360 / region.latitudeDelta) / Math.LN2)
 				: initialRegion && initialRegion.latitudeDelta
-				? (Math.log(360 / initialRegion.latitudeDelta) / Math.LN2).toFixed(2)
+				? Math.round(Math.log(360 / initialRegion.latitudeDelta) / Math.LN2)
 				: 15);
+		console.log("state.zoom" + this.state.zoom);
+		console.log("Zoom" + zoom);
 		googleMapProps["zoom"] = this.state.zoom ? this.state.zoom : zoom;
 		return (
 			<View style={style}>
@@ -117,6 +125,7 @@ class MapView extends Component {
 					containerElement={<div style={{ height: "100%" }} />}
 					mapElement={<div style={{ height: "100%" }} />}
 					onZoomChanged={() => {
+						console.log("i am in onZoomChanged");
 						this.setState({ zoom: this.map.getZoom() });
 					}}
 					{...googleMapProps}
