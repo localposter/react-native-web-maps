@@ -55,12 +55,13 @@ class MapView extends Component {
 		return {
 			latitude: center.lat(),
 			longitude: center.lng(),
-			latitudeDelta: Math.abs(
-				bounds.getSouthWest().lat() - bounds.getNorthEast().lat()
-			),
-			longitudeDelta: Math.abs(
-				bounds.getSouthWest().lng() - bounds.getNorthEast().lng()
-			),
+			// latitudeDelta: Math.abs(
+			// bounds.getSouthWest().lat() - bounds.getNorthEast().lat()
+			// ),
+			// longitudeDelta: Math.abs(
+			// bounds.getSouthWest().lng() - bounds.getNorthEast().lng()
+			// ),
+			zoom: zoom,
 		};
 	};
 
@@ -81,10 +82,6 @@ class MapView extends Component {
 		if (this.map && onRegionChangeComplete) {
 			onRegionChangeComplete(this._getCurrentRegion());
 		}
-		// console.log(onRegionChangeComplete);
-		onRegionChange((region) => {
-			console.log(region);
-		});
 	};
 
 	render() {
@@ -127,7 +124,7 @@ class MapView extends Component {
 		console.log("defaultzoom" + defaultZoom);
 		console.log("state.zoom" + this.state.zoom);
 		console.log("Zoom" + zoom);
-		googleMapProps["zoom"] = this.state.zoom ? this.state.zoom : zoom;
+		googleMapProps["zoom"] = zoom;
 		console.log(googleMapProps);
 		return (
 			<View style={style}>
@@ -135,10 +132,10 @@ class MapView extends Component {
 					handleMapMounted={this.handleMapMounted}
 					containerElement={<div style={{ height: "100%" }} />}
 					mapElement={<div style={{ height: "100%" }} />}
-					onZoomChanged={() => {
-						console.log("i am in onZoomChanged");
-						this.setState({ zoom: this.map.getZoom() });
-					}}
+					// onZoomChanged={() => {
+					// console.log("i am in onZoomChanged");
+					// this.setState({ zoom: this.map.getZoom() });
+					// }}
 					{...googleMapProps}
 					onDragStart={this.onDragStart}
 					onIdle={this.onDragEnd}
