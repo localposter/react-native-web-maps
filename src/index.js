@@ -49,6 +49,8 @@ class MapView extends Component {
 	_getCurrentRegion = () => {
 		const center = this.map.getCenter();
 		const bounds = this.map.getBounds();
+		const zoom = this.map.getZoom();
+		console.log(zoom);
 
 		return {
 			latitude: center.lat(),
@@ -67,7 +69,7 @@ class MapView extends Component {
 		const { onRegionChange } = this.props;
 
 		if (this.map && onRegionChange) {
-			() => onRegionChange(this._getCurrentRegion());
+			onRegionChange(this._getCurrentRegion());
 		}
 		console.log(onRegionChange);
 	};
@@ -77,9 +79,12 @@ class MapView extends Component {
 		const { onRegionChangeComplete } = this.props;
 
 		if (this.map && onRegionChangeComplete) {
-			() => onRegionChangeComplete(this._getCurrentRegion());
+			onRegionChangeComplete(this._getCurrentRegion());
 		}
-		console.log(onRegionChangeComplete);
+		// console.log(onRegionChangeComplete);
+		onRegionChange((region) => {
+			console.log(region);
+		});
 	};
 
 	render() {
