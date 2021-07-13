@@ -67,7 +67,7 @@ class MapView extends Component {
 		const { onRegionChange } = this.props;
 
 		if (this.map && onRegionChange) {
-			onRegionChange(this._getCurrentRegion());
+			() => onRegionChange(this._getCurrentRegion());
 		}
 		console.log(onRegionChange);
 	};
@@ -77,7 +77,7 @@ class MapView extends Component {
 		const { onRegionChangeComplete } = this.props;
 
 		if (this.map && onRegionChangeComplete) {
-			onRegionChangeComplete(this._getCurrentRegion());
+			() => onRegionChangeComplete(this._getCurrentRegion());
 		}
 		console.log(onRegionChangeComplete);
 	};
@@ -135,7 +135,7 @@ class MapView extends Component {
 						this.setState({ zoom: this.map.getZoom() });
 					}}
 					{...googleMapProps}
-					onDragStart={onRegionChange}
+					onDragStart={this.onDragStart}
 					onIdle={this.onDragEnd}
 					defaultZoom={zoom}
 					onClick={onPress}
