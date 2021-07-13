@@ -117,8 +117,8 @@ class MapView extends Component {
 				: initialRegion && initialRegion.latitudeDelta
 				? Math.round(Math.log(360 / initialRegion.latitudeDelta) / Math.LN2)
 				: 15);
-		console.log("Initial region" + initialRegion);
-		console.log("region" + region);
+		console.log("Initial region" + JSON.stringify(initialRegion));
+		console.log("region" + JSON.stringify(region));
 		console.log("defaultzoom" + defaultZoom);
 		console.log("state.zoom" + this.state.zoom);
 		console.log("Zoom" + zoom);
@@ -135,7 +135,7 @@ class MapView extends Component {
 						this.setState({ zoom: this.map.getZoom() });
 					}}
 					{...googleMapProps}
-					onDragStart={this.onDragStart}
+					onDragStart={onRegionChange}
 					onIdle={this.onDragEnd}
 					defaultZoom={zoom}
 					onClick={onPress}
