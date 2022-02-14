@@ -43,10 +43,10 @@
     "eslint": "^5.15.3",
     "eslint-config-bambi": "^1.4.0",
     "prettier": "^1.16.4",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-native-web": "^0.1.1",
-    "webpack": "^3.6.0"
+    "react": "17.0.1",
+    "webpack": "^3.6.0",
+    "react-dom": "^17.0.1",
+    "react-native-web": "^0.17.1"
   },
   "peerDependencies": {
     "react-native-web": "*"
